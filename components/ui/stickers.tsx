@@ -1,6 +1,11 @@
+"use client";
+
 // Small decorative SVG "stickers" used to give every scene a layered,
 // scrapbook-collage feel — bunting, balloons, stars, a disco ball, etc.
 // Kept in the project's own palette rather than literal rainbow colors.
+
+import { motion, useTransform, type MotionValue } from "motion/react";
+import { useParallax } from "@/lib/parallax";
 
 export function StarSticker({ color = "#D6305C", className = "" }: { color?: string; className?: string }) {
   return (
@@ -144,29 +149,44 @@ export type Sticker = {
   delay?: number;
   opacity?: number;
   z?: number;
+  /** 0–1, how strongly this sticker drifts with the cursor on desktop. Default 0.4. */
+  depth?: number;
 };
 
-export function StickerField({ stickers, className = "" }: { stickers: Sticker[]; className?: string }) {
+const PARALLAX_AMPLITUDE = 16;
+
+function StickerItem({ s, parallaxX, parallaxY }: { s: Sticker; parallaxX: MotionValue<number>; parallaxY: MotionValue<number> }) {
+  const depth = s.depth ?? 0.4;
+  const x = useTransform(parallaxX, (v) => v * PARALLAX_AMPLITUDE * depth);
+  const y = useTransform(parallaxY, (v) => v * PARALLAX_AMPLITUDE * depth);
+
   return (
-    <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
-      {stickers.map((s, i) => (
+    <div
+      className="absolute"
+      style={{ top: s.top, left: s.left, right: s.right, bottom: s.bottom, width: s.width, zIndex: s.z ?? 0 }}
+    >
+      <motion.div style={{ x, y }}>
         <div
-          key={i}
-          className={`absolute ${s.animation && s.animation !== "none" ? s.animation : ""}`}
+          className={s.animation && s.animation !== "none" ? s.animation : ""}
           style={{
-            top: s.top,
-            left: s.left,
-            right: s.right,
-            bottom: s.bottom,
-            width: s.width,
             transform: s.rotate ? `rotate(${s.rotate}deg)` : undefined,
             animationDelay: s.delay ? `${s.delay}s` : undefined,
             opacity: s.opacity ?? 1,
-            zIndex: s.z ?? 0,
           }}
         >
           {s.node}
         </div>
+      </motion.div>
+    </div>
+  );
+}
+
+export function StickerField({ stickers, className = "" }: { stickers: Sticker[]; className?: string }) {
+  const { x, y } = useParallax();
+  return (
+    <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
+      {stickers.map((s, i) => (
+        <StickerItem key={i} s={s} parallaxX={x} parallaxY={y} />
       ))}
     </div>
   );

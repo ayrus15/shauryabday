@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SCENES, useScene } from "@/lib/sceneContext";
+import { playWhoosh } from "@/lib/sound";
 import ProgressIndicator from "./ProgressIndicator";
 
 const SCRAPBOOK_SCENES = SCENES.slice(2);
@@ -18,7 +19,10 @@ export default function SceneNavigation() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-walnut/10 bg-cream/90 px-4 py-3 backdrop-blur sm:px-8">
       <button
-        onClick={prev}
+        onClick={() => {
+          playWhoosh();
+          prev();
+        }}
         disabled={isFirst}
         aria-label="Previous memory"
         className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-walnut/80 disabled:opacity-30 enabled:hover:bg-walnut/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-burgundy"
@@ -30,7 +34,10 @@ export default function SceneNavigation() {
       <ProgressIndicator />
 
       <button
-        onClick={next}
+        onClick={() => {
+          playWhoosh();
+          next();
+        }}
         disabled={nextBlocked}
         aria-label="Next memory"
         className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-walnut/80 disabled:opacity-30 enabled:hover:bg-walnut/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-burgundy"

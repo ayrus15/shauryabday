@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "motion/react";
-import { Gift, RotateCcw } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { Gift, PartyPopper, RotateCcw } from "lucide-react";
 import ScrapbookScene from "@/components/scrapbook/ScrapbookScene";
-import PhotoCard from "@/components/scrapbook/PhotoCard";
 import CutoutHeading from "@/components/ui/CutoutHeading";
 import {
   StickerField,
@@ -17,23 +17,38 @@ import {
   PawPrintSticker,
 } from "@/components/ui/stickers";
 import Confetti from "./Confetti";
+import PhotoLightbox from "./PhotoLightbox";
 import { finale } from "@/data/messages";
 import { finalSurpriseMessage, siteConfig } from "@/data/config";
 import { moviePhotos, ethnicDay2025Photos, labPhotos, nov11 } from "@/data/memories";
 import { useScene } from "@/lib/sceneContext";
 import { staggerContainer, staggerItem } from "@/lib/animationVariants";
+import { playFanfare, playWhoosh } from "@/lib/sound";
 
-const highlightPhotos = [moviePhotos[0], ethnicDay2025Photos[0], labPhotos[0]].filter(Boolean);
+const allPhotos = [nov11.photo, moviePhotos[0], ethnicDay2025Photos[0], labPhotos[0]].filter(Boolean);
+const highlightPhotos = allPhotos.slice(1);
 
 export default function BirthdayReveal() {
   const { goTo } = useScene();
+  const [confettiKey, setConfettiKey] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const t = setTimeout(playFanfare, 300);
+    return () => clearTimeout(t);
+  }, []);
+
+  function replay() {
+    playFanfare();
+    setConfettiKey((k) => k + 1);
+  }
 
   return (
     <ScrapbookScene
       bg="stripe-bg"
       className="flex min-h-screen flex-col items-center justify-center overflow-hidden pt-10 text-center"
     >
-      <Confetti />
+      <Confetti key={confettiKey} />
 
       {/* bunting across the top */}
       <div className="absolute inset-x-0 top-0 h-16 w-full opacity-90 sm:h-20">
@@ -70,11 +85,16 @@ export default function BirthdayReveal() {
             >
               <PartyHatSticker />
             </motion.div>
-            <div className="polaroid-shadow w-56 rotate-[-2deg] bg-white p-3 pb-6 sm:w-64">
+            <button
+              type="button"
+              onClick={() => setLightboxIndex(0)}
+              aria-label={`Open photo gallery, starting with ${nov11.photo.alt}`}
+              className="polaroid-shadow w-56 rotate-[-2deg] cursor-zoom-in bg-white p-3 pb-6 transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy sm:w-64"
+            >
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-dusty-rose/40">
                 <Image src={nov11.photo.src} alt={nov11.photo.alt} fill sizes="260px" className="object-cover" />
               </div>
-            </div>
+            </button>
           </motion.div>
         )}
 
@@ -96,7 +116,19 @@ export default function BirthdayReveal() {
 
         <motion.div variants={staggerItem} className="flex flex-wrap items-center justify-center gap-5">
           {highlightPhotos.map((p, i) => (
-            <PhotoCard key={p.src + i} photo={p} rotate={i % 2 === 0 ? -6 : 5} width={150} />
+            <button
+              key={p.src + i}
+              type="button"
+              onClick={() => setLightboxIndex(i + 1)}
+              aria-label={`Open photo gallery: ${p.alt}`}
+              style={{ rotate: `${i % 2 === 0 ? -6 : 5}deg` }}
+              className="polaroid-shadow w-[150px] cursor-zoom-in bg-white p-3 pb-9 transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
+            >
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-dusty-rose/40">
+                <Image src={p.src} alt={p.alt} fill sizes="150px" className="object-cover" />
+              </div>
+              {p.caption && <p className="mt-2 truncate font-hand text-lg text-walnut/80">{p.caption}</p>}
+            </button>
           ))}
         </motion.div>
 
@@ -108,18 +140,34 @@ export default function BirthdayReveal() {
           <p className="font-hand text-xl text-walnut/80">{finalSurpriseMessage}</p>
         </motion.div>
 
-        <motion.button
-          variants={staggerItem}
-          onClick={() => goTo("movie")}
-          className="mt-2 flex items-center gap-2 rounded-full border border-walnut/20 bg-cream/80 px-6 py-3 font-sans text-sm font-medium text-walnut/70 hover:bg-walnut/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
-        >
-          <RotateCcw size={16} /> Revisit our memories
-        </motion.button>
+        <motion.div variants={staggerItem} className="flex flex-wrap items-center justify-center gap-3">
+          <button
+            onClick={() => {
+              playWhoosh();
+              goTo("movie");
+            }}
+            className="flex items-center gap-2 rounded-full border border-walnut/20 bg-cream/80 px-6 py-3 font-sans text-sm font-medium text-walnut/70 hover:bg-walnut/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
+          >
+            <RotateCcw size={16} /> Revisit our memories
+          </button>
+          <button
+            onClick={replay}
+            className="flex items-center gap-2 rounded-full bg-burgundy px-6 py-3 font-sans text-sm font-medium text-cream shadow-md transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
+          >
+            <PartyPopper size={16} /> Replay the magic
+          </button>
+        </motion.div>
 
         <motion.p variants={staggerItem} className="pb-4 font-hand text-lg text-walnut/40">
           happy birthday, {siteConfig.herName}. every chapter of this was true.
         </motion.p>
       </motion.div>
+
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <PhotoLightbox photos={allPhotos} initialIndex={lightboxIndex} onClose={() => setLightboxIndex(null)} />
+        )}
+      </AnimatePresence>
     </ScrapbookScene>
   );
 }

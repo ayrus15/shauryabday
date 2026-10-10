@@ -8,6 +8,7 @@ import FloatingDecor from "./FloatingDecor";
 import { invitation } from "@/data/messages";
 import { siteConfig } from "@/data/config";
 import { useScene } from "@/lib/sceneContext";
+import { playChime, playClick } from "@/lib/sound";
 
 export default function BirthdayInvitation() {
   const { next } = useScene();
@@ -21,10 +22,12 @@ export default function BirthdayInvitation() {
   const noScale = Math.max(1 - Math.min(noClicks, 5) * 0.06, 0.72);
 
   function handleNo() {
+    playClick();
     setNoClicks((c) => c + 1);
   }
 
   function handleYes() {
+    playChime();
     const burst = Array.from({ length: 6 }, (_, i) => ({ id: Date.now() + i, x: (i - 2.5) * 18 }));
     setHearts(burst);
     setLeaving(true);

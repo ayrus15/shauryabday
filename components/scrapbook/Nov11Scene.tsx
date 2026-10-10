@@ -1,16 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import ScrapbookScene from "./ScrapbookScene";
 import { StickerField, StarSticker, SparkleSticker } from "@/components/ui/stickers";
 import { nov11 } from "@/data/memories";
 import { useScene } from "@/lib/sceneContext";
+import { playChime, playTick, playWhoosh } from "@/lib/sound";
+
+function randomTime() {
+  const h = Math.floor(Math.random() * 12) + 1;
+  const m = Math.floor(Math.random() * 60);
+  const period = Math.random() > 0.5 ? "AM" : "PM";
+  return `${h}:${m.toString().padStart(2, "0")} ${period}`;
+}
 
 export default function Nov11Scene() {
   const { next } = useScene();
   const [revealed, setRevealed] = useState(false);
+  const [reeling, setReeling] = useState(false);
+  const [reelDisplay, setReelDisplay] = useState(nov11.time);
+  const reelTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (reelTimeoutRef.current) clearTimeout(reelTimeoutRef.current);
+    };
+  }, []);
+
+  function startReveal() {
+    if (reeling || revealed) return;
+    setReeling(true);
+    let ticks = 0;
+    const totalTicks = 16;
+    const tick = () => {
+      ticks += 1;
+      if (ticks >= totalTicks) {
+        setReelDisplay(nov11.time);
+        setReeling(false);
+        setRevealed(true);
+        playChime();
+        return;
+      }
+      setReelDisplay(randomTime());
+      playTick();
+      // Slow down toward the end, like a reel settling.
+      const delay = 50 + ticks * 12;
+      reelTimeoutRef.current = setTimeout(tick, delay);
+    };
+    reelTimeoutRef.current = setTimeout(tick, 50);
+  }
 
   return (
     <ScrapbookScene bg="bg-walnut" className="film-grain flex min-h-screen flex-col items-center justify-center text-center">
@@ -42,24 +82,29 @@ export default function Nov11Scene() {
 
             <motion.button
               type="button"
-              onClick={() => setRevealed(true)}
+              onClick={startReveal}
+              disabled={reeling}
               initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: reeling ? 1 : 1.05 }}
               className="flex h-28 w-28 items-center justify-center rounded-full bg-burgundy text-cream shadow-[0_0_55px_rgba(214,48,92,0.7)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
               aria-label="Open the sealed memory"
             >
-              <span className="font-serif text-lg">open</span>
+              {reeling ? (
+                <span className="font-mono text-sm tracking-wide tabular-nums">{reelDisplay}</span>
+              ) : (
+                <span className="font-serif text-lg">open</span>
+              )}
             </motion.button>
 
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.4 }}
-              transition={{ duration: 1, delay: 0.6 }}
+              animate={{ opacity: reeling ? 0 : 0.4 }}
+              transition={{ duration: 0.4 }}
               className="font-hand text-xl text-cream/60"
             >
-              tap, whenever you&apos;re ready
+              {reeling ? " " : "tap, whenever you're ready"}
             </motion.p>
           </motion.div>
         ) : (
@@ -120,7 +165,10 @@ export default function Nov11Scene() {
 
             <motion.button
               type="button"
-              onClick={next}
+              onClick={() => {
+                playWhoosh();
+                next();
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 3.8 }}

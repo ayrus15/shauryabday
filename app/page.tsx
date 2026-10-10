@@ -2,7 +2,9 @@
 
 import { AnimatePresence } from "motion/react";
 import { SceneProvider, useScene } from "@/lib/sceneContext";
+import { ParallaxProvider } from "@/lib/parallax";
 import SpotifyPlayer from "@/components/music/SpotifyPlayer";
+import SoundToggle from "@/components/ui/SoundToggle";
 import SceneNavigation from "@/components/ui/SceneNavigation";
 import BirthdayInvitation from "@/components/opening/BirthdayInvitation";
 import WelcomeEnvelope from "@/components/opening/WelcomeEnvelope";
@@ -36,12 +38,15 @@ function SceneRouter() {
 
 export default function Home() {
   return (
-    <SceneProvider>
-      <main className="relative">
-        <SceneRouter />
-        <SceneNavigation />
-        <SpotifyPlayer />
-      </main>
-    </SceneProvider>
+    <ParallaxProvider>
+      <SceneProvider>
+        <main className="relative">
+          <SceneRouter />
+          <SceneNavigation />
+          <SpotifyPlayer />
+          <SoundToggle />
+        </main>
+      </SceneProvider>
+    </ParallaxProvider>
   );
 }

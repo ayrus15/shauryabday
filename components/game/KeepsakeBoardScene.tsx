@@ -20,6 +20,7 @@ import ScrapbookScene from "@/components/scrapbook/ScrapbookScene";
 import { StickerField, StarSticker, SparkleSticker } from "@/components/ui/stickers";
 import { keepsakeTags, keepsakeCombination, keepsake, type KeepsakeTag } from "@/data/keepsake";
 import { useScene } from "@/lib/sceneContext";
+import { playBuzz, playClick, playSnap, playUnlock, playChime } from "@/lib/sound";
 
 const ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   a1: Clapperboard,
@@ -71,9 +72,11 @@ export default function KeepsakeBoardScene() {
 
     const first = keepsakeTags.find((t) => t.id === selectedId)!;
     if (first.pairId === tag.pairId && first.id !== tag.id) {
+      playSnap();
       setMatchedPairs((prev) => ({ ...prev, [tag.pairId]: true }));
       setSelectedId(null);
     } else {
+      playBuzz();
       setWrongIds([selectedId, tag.id]);
       setSelectedId(null);
       setTimeout(() => setWrongIds([]), 450);
@@ -82,6 +85,7 @@ export default function KeepsakeBoardScene() {
 
   function adjustDial(index: number, delta: number) {
     if (!allMatched || boxOpen) return;
+    playClick();
     setDials((prev) => {
       const copy = [...prev];
       copy[index] = (copy[index] + delta + 10) % 10;
@@ -93,10 +97,13 @@ export default function KeepsakeBoardScene() {
     if (!allMatched || boxOpen) return;
     const correct = dials.every((d, i) => d === keepsakeCombination[i]);
     if (correct) {
+      playUnlock();
       setBoxOpen(true);
       completeGame();
+      setTimeout(playChime, 350);
       setTimeout(next, 1400);
     } else {
+      playBuzz();
       setLockShake(true);
       setTimeout(() => setLockShake(false), 450);
     }

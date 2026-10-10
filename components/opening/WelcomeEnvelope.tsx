@@ -7,6 +7,7 @@ import { siteConfig } from "@/data/config";
 import { useScene } from "@/lib/sceneContext";
 import { lineReveal } from "@/lib/animationVariants";
 import { StickerField, StarSticker, SparkleSticker, HeartSticker } from "@/components/ui/stickers";
+import { playCrack, playWhoosh } from "@/lib/sound";
 
 type Stage = "closed" | "opening" | "letter";
 
@@ -49,6 +50,7 @@ export default function WelcomeEnvelope() {
               aria-label={`Open the envelope addressed to ${envelope.addressedTo}`}
               onClick={() => {
                 if (stage === "closed") {
+                  playCrack();
                   setStage("opening");
                   setTimeout(() => setStage("letter"), 1000);
                 }
@@ -128,7 +130,10 @@ export default function WelcomeEnvelope() {
 
             <motion.button
               type="button"
-              onClick={next}
+              onClick={() => {
+                playWhoosh();
+                next();
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: lines.length * 0.35 + 0.6, duration: 0.5 }}
