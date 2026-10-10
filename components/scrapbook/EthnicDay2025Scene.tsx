@@ -3,14 +3,22 @@
 import { motion } from "motion/react";
 import ScrapbookScene, { SceneHeading, WashiTape } from "./ScrapbookScene";
 import PhotoCard from "./PhotoCard";
+import { StickerField, HeartSticker, StarSticker } from "@/components/ui/stickers";
 import { ethnicDay2025 } from "@/data/memories";
 import { staggerContainer, staggerItem } from "@/lib/animationVariants";
 
 export default function EthnicDay2025Scene() {
   return (
-    <ScrapbookScene bg="bg-dusty-rose/20">
-      <WashiTape top="5%" left="12%" rotate={5} color="#9B3348" />
-      <WashiTape top="8%" left="78%" rotate={-6} color="#F2E9FF" />
+    <ScrapbookScene bg="bg-gradient-to-br from-dusty-rose/50 via-cream to-lavender/50">
+      <StickerField
+        stickers={[
+          { node: <HeartSticker color="#D6305C" />, left: "5%", top: "24%", width: 22, animation: "float-slow" },
+          { node: <StarSticker color="#1F9D6E" />, right: "5%", top: "18%", width: 20, animation: "twinkle", delay: 0.5 },
+          { node: <HeartSticker color="#E3D2FF" />, right: "10%", bottom: "16%", width: 18, animation: "float-slow", delay: 1.2 },
+        ]}
+      />
+      <WashiTape top="5%" left="12%" rotate={5} color="#D6305C" />
+      <WashiTape top="8%" left="78%" rotate={-6} color="#E3D2FF" />
 
       <SceneHeading eyebrow="Chapter Two" title={ethnicDay2025.title} subtitle={ethnicDay2025.subtitle} />
 

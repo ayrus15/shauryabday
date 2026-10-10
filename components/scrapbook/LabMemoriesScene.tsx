@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import ScrapbookScene, { SceneHeading, WashiTape } from "./ScrapbookScene";
 import PhotoCard from "./PhotoCard";
+import { StickerField, SparkleSticker, StarSticker } from "@/components/ui/stickers";
 import { labMemories } from "@/data/memories";
 import { staggerContainer, staggerItem } from "@/lib/animationVariants";
 
@@ -10,9 +11,16 @@ const rotations = [-8, 5, -3, 7, -5];
 
 export default function LabMemoriesScene() {
   return (
-    <ScrapbookScene bg="bg-forest/5">
-      <WashiTape top="4%" left="6%" rotate={-10} color="#344B40" />
-      <WashiTape top="10%" left="88%" rotate={8} color="#9B3348" />
+    <ScrapbookScene bg="bg-gradient-to-br from-forest/20 via-cream to-gold/20">
+      <StickerField
+        stickers={[
+          { node: <SparkleSticker color="#1F9D6E" />, left: "4%", top: "16%", width: 24, animation: "twinkle" },
+          { node: <StarSticker color="#D6305C" />, right: "5%", top: "22%", width: 20, animation: "twinkle", delay: 0.7 },
+          { node: <SparkleSticker color="#F6A9BD" />, left: "8%", bottom: "10%", width: 20, animation: "twinkle", delay: 1.3 },
+        ]}
+      />
+      <WashiTape top="4%" left="6%" rotate={-10} color="#1F9D6E" />
+      <WashiTape top="10%" left="88%" rotate={8} color="#D6305C" />
 
       <SceneHeading eyebrow="Chapter Three" title={labMemories.title} subtitle={labMemories.subtitle} />
 
@@ -47,7 +55,7 @@ export default function LabMemoriesScene() {
             >
               <span
                 className="washi-tape absolute -top-2 left-1/2 h-5 w-14 -translate-x-1/2 rounded-sm"
-                style={{ background: "#D9B8B1cc" }}
+                style={{ background: "#F6A9BDcc" }}
                 aria-hidden="true"
               />
               <p className="font-hand text-lg leading-snug text-walnut/80">{note}</p>

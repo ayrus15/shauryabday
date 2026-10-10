@@ -4,14 +4,22 @@ import { motion } from "motion/react";
 import { Film, Ticket } from "lucide-react";
 import ScrapbookScene, { SceneHeading, WashiTape } from "./ScrapbookScene";
 import PhotoCard from "./PhotoCard";
+import { StickerField, StarSticker, SparkleSticker } from "@/components/ui/stickers";
 import { movieDate } from "@/data/memories";
 import { staggerContainer, staggerItem } from "@/lib/animationVariants";
 
 export default function MovieDateScene() {
   return (
-    <ScrapbookScene>
-      <WashiTape top="4%" left="8%" rotate={-8} color="#9B3348" />
-      <WashiTape top="6%" left="82%" rotate={6} color="#344B40" />
+    <ScrapbookScene bg="bg-gradient-to-br from-gold/20 via-cream to-dusty-rose/25">
+      <StickerField
+        stickers={[
+          { node: <StarSticker color="#D6305C" />, left: "4%", top: "20%", width: 22, animation: "twinkle" },
+          { node: <SparkleSticker color="#1F9D6E" />, right: "6%", top: "16%", width: 26, animation: "twinkle", delay: 0.6 },
+          { node: <StarSticker color="#F6A9BD" />, right: "8%", bottom: "14%", width: 18, animation: "float-slow", delay: 1 },
+        ]}
+      />
+      <WashiTape top="4%" left="8%" rotate={-8} color="#D6305C" />
+      <WashiTape top="6%" left="82%" rotate={6} color="#1F9D6E" />
 
       <SceneHeading eyebrow="Chapter One" title={movieDate.title} subtitle={movieDate.date} />
 

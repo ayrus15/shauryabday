@@ -11,7 +11,7 @@ import EthnicDay2025Scene from "@/components/scrapbook/EthnicDay2025Scene";
 import LabMemoriesScene from "@/components/scrapbook/LabMemoriesScene";
 import FullCircleScene from "@/components/scrapbook/FullCircleScene";
 import Nov11Scene from "@/components/scrapbook/Nov11Scene";
-import MemoryQuiz from "@/components/game/MemoryQuiz";
+import KeepsakeBoardScene from "@/components/game/KeepsakeBoardScene";
 import LoveLetter from "@/components/letter/LoveLetter";
 import BirthdayReveal from "@/components/finale/BirthdayReveal";
 
@@ -27,7 +27,7 @@ function SceneRouter() {
       {sceneId === "lab" && <LabMemoriesScene key="lab" />}
       {sceneId === "fullcircle" && <FullCircleScene key="fullcircle" />}
       {sceneId === "nov11" && <Nov11Scene key="nov11" />}
-      {sceneId === "quiz" && <MemoryQuiz key="quiz" />}
+      {sceneId === "keepsake" && <KeepsakeBoardScene key="keepsake" />}
       {sceneId === "letter" && <LoveLetter key="letter" />}
       {sceneId === "finale" && <BirthdayReveal key="finale" />}
     </AnimatePresence>

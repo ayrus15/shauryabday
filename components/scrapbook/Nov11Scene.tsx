@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import ScrapbookScene from "./ScrapbookScene";
+import { StickerField, StarSticker, SparkleSticker } from "@/components/ui/stickers";
 import { nov11 } from "@/data/memories";
 import { useScene } from "@/lib/sceneContext";
 
@@ -14,6 +15,14 @@ export default function Nov11Scene() {
   return (
     <ScrapbookScene bg="bg-walnut" className="film-grain flex min-h-screen flex-col items-center justify-center text-center">
       <div className="vignette absolute inset-0" />
+      <StickerField
+        stickers={[
+          { node: <StarSticker color="#FFF3DD" />, left: "10%", top: "14%", width: 14, animation: "twinkle" },
+          { node: <SparkleSticker color="#F6A9BD" />, right: "12%", top: "22%", width: 16, animation: "twinkle", delay: 0.9 },
+          { node: <StarSticker color="#F6A9BD" />, left: "18%", bottom: "18%", width: 10, animation: "twinkle", delay: 1.6 },
+          { node: <SparkleSticker color="#FFF3DD" />, right: "18%", bottom: "26%", width: 12, animation: "twinkle", delay: 0.4 },
+        ]}
+      />
 
       <AnimatePresence mode="wait">
         {!revealed ? (
@@ -38,7 +47,7 @@ export default function Nov11Scene() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ scale: 1.05 }}
-              className="flex h-28 w-28 items-center justify-center rounded-full bg-burgundy text-cream shadow-[0_0_40px_rgba(155,51,72,0.5)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
+              className="flex h-28 w-28 items-center justify-center rounded-full bg-burgundy text-cream shadow-[0_0_55px_rgba(214,48,92,0.7)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
               aria-label="Open the sealed memory"
             >
               <span className="font-serif text-lg">open</span>

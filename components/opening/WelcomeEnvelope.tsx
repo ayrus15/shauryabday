@@ -6,6 +6,7 @@ import { envelope } from "@/data/messages";
 import { siteConfig } from "@/data/config";
 import { useScene } from "@/lib/sceneContext";
 import { lineReveal } from "@/lib/animationVariants";
+import { StickerField, StarSticker, SparkleSticker, HeartSticker } from "@/components/ui/stickers";
 
 type Stage = "closed" | "opening" | "letter";
 
@@ -17,14 +18,21 @@ export default function WelcomeEnvelope() {
 
   return (
     <motion.section
-      initial={{ backgroundColor: "#F2E9FF" }}
-      animate={{ backgroundColor: stage === "closed" ? "#F2E9FF" : "#F5EBDD" }}
+      initial={{ backgroundColor: "#E3D2FF" }}
+      animate={{ backgroundColor: stage === "closed" ? "#E3D2FF" : "#FFF3DD" }}
       exit={{ opacity: 0, transition: { duration: 0.4 } }}
       transition={{ duration: 1.1, ease: "easeInOut" }}
       className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 py-16 text-center"
       aria-label="Opening the scrapbook"
     >
       <div className="vignette absolute inset-0" />
+      <StickerField
+        stickers={[
+          { node: <StarSticker color="#D6305C" />, left: "8%", top: "14%", width: 20, animation: "twinkle" },
+          { node: <SparkleSticker color="#1F9D6E" />, right: "10%", top: "20%", width: 18, animation: "twinkle", delay: 0.8 },
+          { node: <HeartSticker color="#F6A9BD" />, left: "14%", bottom: "16%", width: 18, animation: "float-slow", delay: 1.2 },
+        ]}
+      />
 
       <AnimatePresence mode="wait">
         {stage !== "letter" && (
@@ -72,7 +80,7 @@ export default function WelcomeEnvelope() {
                 transition={{ duration: 0.8, ease: "easeInOut" }}
               >
                 <svg viewBox="0 0 360 143" className="h-full w-full" preserveAspectRatio="none">
-                  <polygon points="0,0 360,0 180,140" fill="#EDE0CC" stroke="#35251F" strokeOpacity="0.15" />
+                  <polygon points="0,0 360,0 180,140" fill="#EDE0CC" stroke="#3D2418" strokeOpacity="0.15" />
                 </svg>
               </motion.div>
 

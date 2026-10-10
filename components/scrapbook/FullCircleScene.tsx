@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { MoveHorizontal } from "lucide-react";
 import ScrapbookScene, { SceneHeading } from "./ScrapbookScene";
+import { StickerField, HeartSticker, StarSticker } from "@/components/ui/stickers";
 import { fullCircle } from "@/data/memories";
 import { fadeUp } from "@/lib/animationVariants";
 
@@ -21,7 +22,14 @@ export default function FullCircleScene() {
   }
 
   return (
-    <ScrapbookScene bg="bg-walnut/5">
+    <ScrapbookScene bg="bg-gradient-to-b from-lavender/50 via-cream to-dusty-rose/40">
+      <StickerField
+        stickers={[
+          { node: <HeartSticker color="#D6305C" />, left: "6%", top: "18%", width: 22, animation: "float-slow" },
+          { node: <StarSticker color="#1F9D6E" />, right: "7%", top: "14%", width: 20, animation: "twinkle", delay: 0.5 },
+          { node: <HeartSticker color="#F6A9BD" />, right: "5%", bottom: "20%", width: 18, animation: "float-slow", delay: 1 },
+        ]}
+      />
       <SceneHeading eyebrow="Chapter Four" title={fullCircle.title} />
 
       <motion.div variants={fadeUp} initial="hidden" animate="visible" className="mx-auto max-w-xl">

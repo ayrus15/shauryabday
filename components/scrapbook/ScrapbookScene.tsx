@@ -27,7 +27,7 @@ export function WashiTape({
   top,
   left,
   rotate = -4,
-  color = "#D9B8B1",
+  color = "#F6A9BD",
   width = 90,
 }: {
   top: string;

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import ScrapbookScene, { SceneHeading } from "@/components/scrapbook/ScrapbookScene";
+import { StickerField, HeartSticker, SparkleSticker } from "@/components/ui/stickers";
 import { letter } from "@/data/messages";
 import { useScene } from "@/lib/sceneContext";
 import { lineReveal } from "@/lib/animationVariants";
@@ -13,7 +14,14 @@ export default function LoveLetter() {
   const paragraphs = letter.body.split("\n").filter((l) => l.trim().length > 0);
 
   return (
-    <ScrapbookScene bg="bg-cream">
+    <ScrapbookScene bg="bg-gradient-to-br from-dusty-rose/25 via-cream to-gold/15">
+      <StickerField
+        stickers={[
+          { node: <HeartSticker color="#D6305C" />, left: "6%", top: "16%", width: 20, animation: "float-slow" },
+          { node: <SparkleSticker color="#F6A9BD" />, right: "7%", top: "20%", width: 20, animation: "twinkle", delay: 0.7 },
+          { node: <HeartSticker color="#1F9D6E" />, right: "10%", bottom: "14%", width: 16, animation: "float-slow", delay: 1.3 },
+        ]}
+      />
       <SceneHeading eyebrow="Chapter Six" title={letter.heading} />
 
       <div className="mx-auto max-w-2xl">

@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 
-const colors = ["#9B3348", "#D9B8B1", "#344B40", "#F2E9FF", "#F5EBDD"];
+const colors = ["#D6305C", "#F6A9BD", "#1F9D6E", "#E3D2FF", "#FFF3DD"];
 
 function randomBetween(min: number, max: number) {
   return min + Math.random() * (max - min);
