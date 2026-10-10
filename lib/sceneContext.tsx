@@ -37,35 +37,38 @@ export function SceneProvider({ children }: { children: React.ReactNode }) {
   const [furthestUnlocked, setFurthestUnlocked] = useState(0);
 
   const quizIndex = SCENES.indexOf("quiz");
-  const finaleIndex = SCENES.indexOf("finale");
 
+  // Everything after the quiz (the letter and the finale) requires the quiz
+  // to actually be completed — not just reached — otherwise the progress
+  // dots let you skip straight from the quiz to the letter without finishing
+  // it, leaving `next()` on the letter scene silently unable to advance.
   const canGoTo = useCallback(
     (id: SceneId) => {
       const idx = SCENES.indexOf(id);
-      if (idx === finaleIndex && !quizCompleted) return false;
+      if (idx > quizIndex && !quizCompleted) return false;
       return idx <= furthestUnlocked + 1;
     },
-    [furthestUnlocked, quizCompleted, finaleIndex]
+    [furthestUnlocked, quizCompleted, quizIndex]
   );
 
   const goTo = useCallback(
     (id: SceneId) => {
       const idx = SCENES.indexOf(id);
-      if (idx === finaleIndex && !quizCompleted) return;
+      if (idx > quizIndex && !quizCompleted) return;
       setSceneIndex(idx);
       setFurthestUnlocked((f) => Math.max(f, idx));
     },
-    [quizCompleted, finaleIndex]
+    [quizCompleted, quizIndex]
   );
 
   const next = useCallback(() => {
     setSceneIndex((i) => {
       const nextIdx = Math.min(i + 1, SCENES.length - 1);
-      if (nextIdx === finaleIndex && !quizCompleted) return i;
+      if (nextIdx > quizIndex && !quizCompleted) return i;
       setFurthestUnlocked((f) => Math.max(f, nextIdx));
       return nextIdx;
     });
-  }, [quizCompleted, finaleIndex]);
+  }, [quizCompleted, quizIndex]);
 
   const prev = useCallback(() => {
     setSceneIndex((i) => Math.max(i - 1, 0));
