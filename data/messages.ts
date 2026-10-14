@@ -25,19 +25,27 @@ export const envelope = {
 };
 
 export const letter = {
-  heading: "A letter for Baby",
+  heading: "A Letter to My Baby",
   // Edit this freely — line breaks (\n) control the reveal pacing.
-  body: `[[EDIT ME: My dearest Baby,
+  body: `My Shaurya,
 
-This is the part of the website where I get to say the things
-that don't fit neatly into a photo caption.
+It's been more than a year, and my love only grows for you.
 
-Write whatever you actually want to say to her here — it can be
-as long or short as you like. Each line will animate in on its own,
-so short lines land with more weight.
+I know I don't express much, but I love you the mostestt.
+I know how hard it is to deal with me, yet you bear with me.
 
-— love, always]]`,
-  signature: "[[EDIT ME: sign-off / your name]]",
+You have changed me so much, in ways I can't tell you.
+You have become an integral part of my life — I don't know what I would do without you. :(
+
+You will always and forever be my best girl ever.
+I never imagined myself falling so hard for someone... but you.
+You are, and always will be, my special girl.
+
+Happiest birthday, my Shaurya.
+The first of all the remaining birthdays of yours — I will always be there for you.
+
+I love you more than you'll ever know.`,
+  signature: "Surya — Best Guy Ever",
 };
 
 export const playlist = {
