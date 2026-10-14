@@ -129,7 +129,7 @@ export default function KeepsakeBoardScene() {
       />
       <div className="mx-auto mb-10 max-w-2xl text-center">
         <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-cream/80 text-shadow-soft">
-          Chapter Five
+          Chapter Four
         </p>
         <h2 className="font-serif text-3xl font-bold text-cream text-shadow-soft sm:text-4xl">{keepsake.intro}</h2>
         <p className="mt-2 font-hand text-xl text-cream/85 text-shadow-soft">{keepsake.subIntro}</p>

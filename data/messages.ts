@@ -1,10 +1,11 @@
 // Copy for the invitation, envelope, letter, and finale. Edit freely.
 
 export const invitation = {
-  greeting: "Hey Baby, guess what?",
-  subline: "Someone has made something just for you.",
-  yesLabel: "YES, show me!",
+  greeting: "Heyy Shaurya,",
+  subline: "Is Surya the best guy ever?",
+  yesLabel: "YES",
   noLabel: "NO",
+  signoff: "for Shaurya, from Surya — the best guy ever",
   noResponses: [
     "No? Really?",
     "Are you sure...?",
@@ -19,8 +20,7 @@ export const envelope = {
   addressedTo: "Shaurya",
   fromLabel: "with love",
   openPrompt: "tap to open",
-  revealMessage:
-    "I made you a little something, Baby. A place for all the little things that somehow became my favourite memories.",
+  revealMessage: "I made you something, Shaurya — a digital place for all the little things that are my favourite memories.",
   continueLabel: "turn the page",
 };
 

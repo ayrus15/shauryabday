@@ -10,61 +10,36 @@ export type Photo = {
 };
 
 export const moviePhotos: Photo[] = [
-  { src: "/photos/placeholder-1.svg", alt: "Placeholder photo from the movie date", caption: "[[EDIT ME: add photo from the night]]" },
-  { src: "/photos/placeholder-2.svg", alt: "Placeholder photo from the movie date", caption: "[[EDIT ME: add another photo]]" },
+  { src: "/photos/rockstar-poster.jpg", alt: "Rockstar movie poster" },
 ];
 
 export const movieDate = {
-  title: "Rockstar, October 2025",
-  // Exact date unknown — fill in if you have it, e.g. "October 12, 2025".
-  date: "[[EDIT ME: exact date]]",
+  title: "Rockstar, August 2025",
+  date: "August 25, 2025",
   ticketLabel: "ADMIT TWO",
-  caption:
-    "[[EDIT ME: a line about how the evening felt — the theatre, the seats, the walk after.]]",
-  insideJoke:
-    "[[EDIT ME: the inside joke from that night, if there is one.]]",
+  caption: "The best cinema experience till date.",
+  insideJoke: "The day I realised you are more than a fling.",
   photos: moviePhotos,
 };
 
 export const ethnicDay2025Photos: Photo[] = [
-  { src: "/photos/placeholder-1.svg", alt: "Ethnic Day 2025 placeholder", caption: "[[EDIT ME]]" },
+  { src: "/photos/ethnic-day-2025.jpg", alt: "Shaurya and Surya dressed up for Ethnic Day, 2025" },
 ];
 
 export const ethnicDay2025 = {
   title: "Ethnic Day, 2025",
   subtitle: "Before we were us",
-  note:
-    "Funny how a memory can mean something completely different when you look back at it.",
+  note: "This will always be the closest to my heart — the day I fell completely in love.",
   photos: ethnicDay2025Photos,
 };
 
-export const labPhotos: Photo[] = [
-  { src: "/photos/placeholder-1.svg", alt: "Research lab placeholder photo", caption: "[[EDIT ME: caption]]" },
-  { src: "/photos/placeholder-2.svg", alt: "Research lab placeholder photo", caption: "[[EDIT ME: caption]]" },
-  { src: "/photos/placeholder-3.svg", alt: "Research lab placeholder photo", caption: "[[EDIT ME: caption]]" },
-];
-
-export const labMemories = {
-  title: "The Research Lab Chronicles",
-  subtitle: "Less formal, more us",
-  intro:
-    "[[EDIT ME: a line setting up the lab era — the long hours, the shared desk, whatever made it ours.]]",
-  notes: [
-    "[[EDIT ME: a funny taped-note moment #1]]",
-    "[[EDIT ME: a funny taped-note moment #2]]",
-    "[[EDIT ME: a funny taped-note moment #3]]",
-  ],
-  photos: labPhotos,
-};
-
 export const ethnicDay2026Photos: Photo[] = [
-  { src: "/photos/placeholder-2.svg", alt: "Ethnic Day 2026 placeholder", caption: "[[EDIT ME]]" },
+  { src: "/photos/ethnic-day-2025.jpg", alt: "Shaurya and Surya dressed up for Ethnic Day, 2025" },
 ];
 
 export const fullCircle = {
   title: "Ethnic Day, 2025 → 2026",
-  message:
-    "Last year, we were just making memories. This year, I got to make that memory with you as my girlfriend.",
+  message: "The best one year of my life — from a fling to my girlfriend. 😜😝 You have made it in life.",
   before: {
     year: "2025",
     photo: ethnicDay2025Photos[0],

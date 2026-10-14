@@ -16,7 +16,7 @@ export type KeepsakeTag = {
 // November 11th, the one date this whole site keeps coming back to.
 export const keepsakeTags: KeepsakeTag[] = [
   { id: "a1", pairId: "movie", label: "Rockstar", sublabel: "the screen was too bright", top: "10%", left: "8%", rotate: -6 },
-  { id: "a2", pairId: "movie", label: "First Movie Date", sublabel: "October 2025", top: "34%", left: "62%", rotate: 4 },
+  { id: "a2", pairId: "movie", label: "First Movie Date", sublabel: "August 2025", top: "34%", left: "62%", rotate: 4 },
 
   { id: "b1", pairId: "ethnic", label: "Ethnic Day", sublabel: "before we were us", top: "6%", left: "70%", rotate: 5 },
   { id: "b2", pairId: "ethnic", label: "Ethnic Day, again", sublabel: "this time, together", top: "58%", left: "6%", rotate: -4 },

@@ -10,7 +10,6 @@ import BirthdayInvitation from "@/components/opening/BirthdayInvitation";
 import WelcomeEnvelope from "@/components/opening/WelcomeEnvelope";
 import MovieDateScene from "@/components/scrapbook/MovieDateScene";
 import EthnicDay2025Scene from "@/components/scrapbook/EthnicDay2025Scene";
-import LabMemoriesScene from "@/components/scrapbook/LabMemoriesScene";
 import FullCircleScene from "@/components/scrapbook/FullCircleScene";
 import Nov11Scene from "@/components/scrapbook/Nov11Scene";
 import KeepsakeBoardScene from "@/components/game/KeepsakeBoardScene";
@@ -26,7 +25,6 @@ function SceneRouter() {
       {sceneId === "envelope" && <WelcomeEnvelope key="envelope" />}
       {sceneId === "movie" && <MovieDateScene key="movie" />}
       {sceneId === "ethnic2025" && <EthnicDay2025Scene key="ethnic2025" />}
-      {sceneId === "lab" && <LabMemoriesScene key="lab" />}
       {sceneId === "fullcircle" && <FullCircleScene key="fullcircle" />}
       {sceneId === "nov11" && <Nov11Scene key="nov11" />}
       {sceneId === "keepsake" && <KeepsakeBoardScene key="keepsake" />}

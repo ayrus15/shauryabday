@@ -7,7 +7,6 @@ export const SCENES = [
   "envelope",
   "movie",
   "ethnic2025",
-  "lab",
   "fullcircle",
   "nov11",
   "keepsake",

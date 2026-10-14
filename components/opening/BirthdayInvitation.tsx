@@ -6,7 +6,6 @@ import { Heart } from "lucide-react";
 import Character from "./Character";
 import FloatingDecor from "./FloatingDecor";
 import { invitation } from "@/data/messages";
-import { siteConfig } from "@/data/config";
 import { useScene } from "@/lib/sceneContext";
 import { playChime, playClick } from "@/lib/sound";
 
@@ -113,7 +112,7 @@ export default function BirthdayInvitation() {
       </div>
 
       <p className="relative z-10 mt-12 font-hand text-xl text-walnut/50">
-        for {siteConfig.herName}, from me
+        {invitation.signoff}
       </p>
     </motion.section>
   );

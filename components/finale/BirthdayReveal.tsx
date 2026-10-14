@@ -20,12 +20,12 @@ import Confetti from "./Confetti";
 import PhotoLightbox from "./PhotoLightbox";
 import { finale } from "@/data/messages";
 import { finalSurpriseMessage, siteConfig } from "@/data/config";
-import { moviePhotos, ethnicDay2025Photos, labPhotos, nov11 } from "@/data/memories";
+import { moviePhotos, ethnicDay2025Photos, ethnicDay2026Photos, nov11 } from "@/data/memories";
 import { useScene } from "@/lib/sceneContext";
 import { staggerContainer, staggerItem } from "@/lib/animationVariants";
 import { playFanfare, playWhoosh } from "@/lib/sound";
 
-const allPhotos = [nov11.photo, moviePhotos[0], ethnicDay2025Photos[0], labPhotos[0]].filter(Boolean);
+const allPhotos = [nov11.photo, moviePhotos[0], ethnicDay2025Photos[0], ethnicDay2026Photos[0]].filter(Boolean);
 const highlightPhotos = allPhotos.slice(1);
 
 export default function BirthdayReveal() {

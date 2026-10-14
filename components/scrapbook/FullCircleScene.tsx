@@ -30,7 +30,7 @@ export default function FullCircleScene() {
           { node: <HeartSticker color="#F6A9BD" />, right: "5%", bottom: "20%", width: 18, animation: "float-slow", delay: 1 },
         ]}
       />
-      <SceneHeading eyebrow="Chapter Four" title={fullCircle.title} />
+      <SceneHeading eyebrow="Chapter Three" title={fullCircle.title} />
 
       <motion.div variants={fadeUp} initial="hidden" animate="visible" className="mx-auto max-w-xl">
         <div
