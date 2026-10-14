@@ -34,7 +34,7 @@ export const ethnicDay2025 = {
 };
 
 export const ethnicDay2026Photos: Photo[] = [
-  { src: "/photos/ethnic-day-2025.jpg", alt: "Shaurya and Surya dressed up for Ethnic Day, 2025" },
+  { src: "/photos/ethnic-day-2026.jpg", alt: "Shaurya and Surya dressed up for Ethnic Day, 2026" },
 ];
 
 export const fullCircle = {
