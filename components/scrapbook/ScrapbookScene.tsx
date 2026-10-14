@@ -16,7 +16,7 @@ export default function ScrapbookScene({ children, className = "", bg = "bg-crea
       initial="hidden"
       animate="visible"
       exit="exit"
-      className={`paper-grain relative min-h-screen w-full px-5 pb-28 pt-14 sm:px-10 sm:pt-20 ${bg} ${className}`}
+      className={`paper-grain relative min-h-dvh w-full px-5 pb-28 pt-14 sm:px-10 sm:pt-20 ${bg} ${className}`}
     >
       {children}
     </motion.section>

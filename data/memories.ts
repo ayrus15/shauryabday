@@ -58,5 +58,5 @@ export const nov11 = {
   line: "The moment you became my girlfriend.",
   message:
     "Of all the dates I could remember, this is the one I never want to forget.",
-  photo: { src: "/photos/placeholder-3.svg", alt: "November 11 placeholder photo" } as Photo,
+  photo: { src: "/photos/nov11-moment.jpg", alt: "The moment Shaurya became Surya's girlfriend" } as Photo,
 };

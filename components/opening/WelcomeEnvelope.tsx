@@ -23,7 +23,7 @@ export default function WelcomeEnvelope() {
       animate={{ backgroundColor: stage === "closed" ? "#E3D2FF" : "#FFF3DD" }}
       exit={{ opacity: 0, transition: { duration: 0.4 } }}
       transition={{ duration: 1.1, ease: "easeInOut" }}
-      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 py-16 text-center"
+      className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden px-6 py-16 text-center"
       aria-label="Opening the scrapbook"
     >
       <div className="vignette absolute inset-0" />

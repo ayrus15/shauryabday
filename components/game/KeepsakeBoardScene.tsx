@@ -119,7 +119,7 @@ export default function KeepsakeBoardScene() {
   );
 
   return (
-    <ScrapbookScene bg="cork-texture" className="min-h-screen">
+    <ScrapbookScene bg="cork-texture" className="min-h-dvh">
       <StickerField
         stickers={[
           { node: <StarSticker color="#FFC43D" />, left: "3%", top: "6%", width: 24, animation: "twinkle" },
@@ -161,7 +161,7 @@ export default function KeepsakeBoardScene() {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
-            className="absolute z-20 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-cream bg-burgundy font-serif text-base font-bold text-cream shadow-md"
+            className="pointer-events-none absolute z-20 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-cream bg-burgundy font-serif text-base font-bold text-cream shadow-md"
             style={{ left: `${mid.x}%`, top: `${mid.y}%` }}
           >
             {keepsakeCombination[PAIR_ORDER.indexOf(pairId)]}
@@ -182,8 +182,13 @@ export default function KeepsakeBoardScene() {
               disabled={isMatched}
               aria-label={`${tag.label}, ${tag.sublabel}${isMatched ? ", connected" : ""}`}
               aria-pressed={isSelected}
-              style={{ top: tag.top, left: tag.left, transform: `translate(-50%, -50%) rotate(${tag.rotate}deg)` }}
-              className={`absolute z-10 w-32 rounded-sm bg-[#FFF9E8] p-3 text-left shadow-md transition-shadow sm:w-36 ${
+              style={{
+                top: tag.top,
+                left: tag.left,
+                transform: `translate(-50%, -50%) rotate(${tag.rotate}deg)`,
+                zIndex: isSelected ? 30 : 10,
+              }}
+              className={`absolute w-28 rounded-sm bg-[#FFF9E8] p-2.5 text-left shadow-md transition-shadow sm:w-36 sm:p-3 ${
                 isSelected ? "ring-2 ring-burgundy" : ""
               } ${isMatched ? "opacity-60" : "hover:shadow-lg"} ${isWrong ? "shake" : ""} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy`}
             >
@@ -192,8 +197,8 @@ export default function KeepsakeBoardScene() {
                 aria-hidden="true"
               />
               <Icon size={16} className="mb-1 text-burgundy" />
-              <p className="font-hand text-base leading-tight text-walnut">{tag.label}</p>
-              <p className="font-sans text-[11px] text-walnut/55">{tag.sublabel}</p>
+              <p className="line-clamp-2 font-hand text-sm leading-tight text-walnut sm:text-base">{tag.label}</p>
+              <p className="line-clamp-1 font-sans text-[10px] text-walnut/55 sm:text-[11px]">{tag.sublabel}</p>
             </button>
           );
         })}

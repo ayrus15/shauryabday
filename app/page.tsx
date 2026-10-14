@@ -3,7 +3,6 @@
 import { AnimatePresence } from "motion/react";
 import { SceneProvider, useScene } from "@/lib/sceneContext";
 import { ParallaxProvider } from "@/lib/parallax";
-import SpotifyPlayer from "@/components/music/SpotifyPlayer";
 import SoundToggle from "@/components/ui/SoundToggle";
 import SceneNavigation from "@/components/ui/SceneNavigation";
 import BirthdayInvitation from "@/components/opening/BirthdayInvitation";
@@ -13,6 +12,7 @@ import EthnicDay2025Scene from "@/components/scrapbook/EthnicDay2025Scene";
 import FullCircleScene from "@/components/scrapbook/FullCircleScene";
 import Nov11Scene from "@/components/scrapbook/Nov11Scene";
 import KeepsakeBoardScene from "@/components/game/KeepsakeBoardScene";
+import PlaylistScene from "@/components/music/PlaylistScene";
 import LoveLetter from "@/components/letter/LoveLetter";
 import BirthdayReveal from "@/components/finale/BirthdayReveal";
 
@@ -28,6 +28,7 @@ function SceneRouter() {
       {sceneId === "fullcircle" && <FullCircleScene key="fullcircle" />}
       {sceneId === "nov11" && <Nov11Scene key="nov11" />}
       {sceneId === "keepsake" && <KeepsakeBoardScene key="keepsake" />}
+      {sceneId === "playlist" && <PlaylistScene key="playlist" />}
       {sceneId === "letter" && <LoveLetter key="letter" />}
       {sceneId === "finale" && <BirthdayReveal key="finale" />}
     </AnimatePresence>
@@ -41,7 +42,6 @@ export default function Home() {
         <main className="relative">
           <SceneRouter />
           <SceneNavigation />
-          <SpotifyPlayer />
           <SoundToggle />
         </main>
       </SceneProvider>

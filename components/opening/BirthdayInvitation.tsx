@@ -35,7 +35,7 @@ export default function BirthdayInvitation() {
 
   return (
     <motion.section
-      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-lavender px-6 py-16 text-center"
+      className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden bg-lavender px-6 py-16 text-center"
       animate={leaving ? { opacity: 0, scale: 1.04 } : { opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
       aria-label="Birthday invitation"

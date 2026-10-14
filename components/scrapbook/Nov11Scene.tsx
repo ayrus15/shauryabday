@@ -53,7 +53,7 @@ export default function Nov11Scene() {
   }
 
   return (
-    <ScrapbookScene bg="bg-walnut" className="film-grain flex min-h-screen flex-col items-center justify-center text-center">
+    <ScrapbookScene bg="bg-walnut" className="film-grain flex min-h-dvh flex-col items-center justify-center text-center">
       <div className="vignette absolute inset-0" />
       <StickerField
         stickers={[

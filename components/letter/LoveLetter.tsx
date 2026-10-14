@@ -22,7 +22,7 @@ export default function LoveLetter() {
           { node: <HeartSticker color="#1F9D6E" />, right: "10%", bottom: "14%", width: 16, animation: "float-slow", delay: 1.3 },
         ]}
       />
-      <SceneHeading eyebrow="Chapter Five" title={letter.heading} />
+      <SceneHeading eyebrow="Chapter Six" title={letter.heading} />
 
       <div className="mx-auto max-w-2xl">
         {!unfolded ? (

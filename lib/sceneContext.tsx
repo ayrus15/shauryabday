@@ -10,6 +10,7 @@ export const SCENES = [
   "fullcircle",
   "nov11",
   "keepsake",
+  "playlist",
   "letter",
   "finale",
 ] as const;

@@ -17,7 +17,10 @@ export default function SceneNavigation() {
   const nextBlocked = isLast || !canGoTo(SCENES[Math.min(sceneIndex + 1, SCENES.length - 1)]);
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-walnut/10 bg-cream/90 px-4 py-3 backdrop-blur sm:px-8">
+    <div
+      className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-walnut/10 bg-cream/90 px-4 py-3 backdrop-blur sm:px-8"
+      style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+    >
       <button
         onClick={() => {
           playWhoosh();

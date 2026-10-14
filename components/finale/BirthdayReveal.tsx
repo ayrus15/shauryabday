@@ -11,7 +11,6 @@ import {
   StarSticker,
   SparkleSticker,
   BalloonSticker,
-  PartyHatSticker,
   DiscoBallSticker,
   BuntingBanner,
   PawPrintSticker,
@@ -20,18 +19,17 @@ import Confetti from "./Confetti";
 import PhotoLightbox from "./PhotoLightbox";
 import { finale } from "@/data/messages";
 import { finalSurpriseMessage, siteConfig } from "@/data/config";
-import { moviePhotos, ethnicDay2025Photos, ethnicDay2026Photos, nov11 } from "@/data/memories";
+import type { Photo } from "@/data/memories";
 import { useScene } from "@/lib/sceneContext";
 import { staggerContainer, staggerItem } from "@/lib/animationVariants";
 import { playFanfare, playWhoosh } from "@/lib/sound";
 
-const allPhotos = [nov11.photo, moviePhotos[0], ethnicDay2025Photos[0], ethnicDay2026Photos[0]].filter(Boolean);
-const highlightPhotos = allPhotos.slice(1);
+const heroPhoto: Photo = { src: "/photos/happy-birthday.jpg", alt: "Happy birthday, Shaurya" };
 
 export default function BirthdayReveal() {
   const { goTo } = useScene();
   const [confettiKey, setConfettiKey] = useState(0);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(playFanfare, 300);
@@ -46,7 +44,7 @@ export default function BirthdayReveal() {
   return (
     <ScrapbookScene
       bg="stripe-bg"
-      className="flex min-h-screen flex-col items-center justify-center overflow-hidden pt-10 text-center"
+      className="flex min-h-dvh flex-col items-center justify-center overflow-hidden pt-10 text-center"
     >
       <Confetti key={confettiKey} />
 
@@ -75,28 +73,18 @@ export default function BirthdayReveal() {
         animate="visible"
         className="relative z-10 flex max-w-2xl flex-col items-center gap-7 px-4 pt-6"
       >
-        {nov11.photo && (
-          <motion.div variants={staggerItem} className="relative">
-            <motion.div
-              className="absolute -left-6 -top-7 z-10 w-14 sm:-left-10 sm:-top-10 sm:w-20"
-              initial={{ opacity: 0, rotate: -40, scale: 0.6 }}
-              animate={{ opacity: 1, rotate: -18, scale: 1 }}
-              transition={{ delay: 0.5, duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
-            >
-              <PartyHatSticker />
-            </motion.div>
-            <button
-              type="button"
-              onClick={() => setLightboxIndex(0)}
-              aria-label={`Open photo gallery, starting with ${nov11.photo.alt}`}
-              className="polaroid-shadow w-56 rotate-[-2deg] cursor-zoom-in bg-white p-3 pb-6 transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy sm:w-64"
-            >
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-dusty-rose/40">
-                <Image src={nov11.photo.src} alt={nov11.photo.alt} fill sizes="260px" className="object-cover" />
-              </div>
-            </button>
-          </motion.div>
-        )}
+        <motion.div variants={staggerItem} className="relative">
+          <button
+            type="button"
+            onClick={() => setLightboxOpen(true)}
+            aria-label="Open the birthday photo"
+            className="polaroid-shadow w-64 rotate-[-2deg] cursor-zoom-in bg-white p-3 pb-6 transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy sm:w-72"
+          >
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-dusty-rose/40">
+              <Image src={heroPhoto.src} alt={heroPhoto.alt} fill sizes="300px" className="object-cover" />
+            </div>
+          </button>
+        </motion.div>
 
         <motion.div variants={staggerItem} className="flex items-center gap-3">
           <StarSticker color="#1F9D6E" className="h-6 w-6 sm:h-8 sm:w-8" />
@@ -113,24 +101,6 @@ export default function BirthdayReveal() {
         <motion.p variants={staggerItem} className="max-w-md font-sans text-base text-walnut/75 sm:text-lg">
           {finale.closingMessage}
         </motion.p>
-
-        <motion.div variants={staggerItem} className="flex flex-wrap items-center justify-center gap-5">
-          {highlightPhotos.map((p, i) => (
-            <button
-              key={p.src + i}
-              type="button"
-              onClick={() => setLightboxIndex(i + 1)}
-              aria-label={`Open photo gallery: ${p.alt}`}
-              style={{ rotate: `${i % 2 === 0 ? -6 : 5}deg` }}
-              className="polaroid-shadow w-[150px] cursor-zoom-in bg-white p-3 pb-9 transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
-            >
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-dusty-rose/40">
-                <Image src={p.src} alt={p.alt} fill sizes="150px" className="object-cover" />
-              </div>
-              {p.caption && <p className="mt-2 truncate font-hand text-lg text-walnut/80">{p.caption}</p>}
-            </button>
-          ))}
-        </motion.div>
 
         <motion.div
           variants={staggerItem}
@@ -164,8 +134,8 @@ export default function BirthdayReveal() {
       </motion.div>
 
       <AnimatePresence>
-        {lightboxIndex !== null && (
-          <PhotoLightbox photos={allPhotos} initialIndex={lightboxIndex} onClose={() => setLightboxIndex(null)} />
+        {lightboxOpen && (
+          <PhotoLightbox photos={[heroPhoto]} initialIndex={0} onClose={() => setLightboxOpen(false)} />
         )}
       </AnimatePresence>
     </ScrapbookScene>

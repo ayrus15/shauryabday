@@ -1,11 +1,11 @@
 // Copy for the invitation, envelope, letter, and finale. Edit freely.
 
 export const invitation = {
-  greeting: "Heyy Shaurya,",
+  greeting: "Heyy Shauryaya,",
   subline: "Is Surya the best guy ever?",
   yesLabel: "YES",
   noLabel: "NO",
-  signoff: "for Shaurya, from Surya — the best guy ever",
+  signoff: "for the best girl, from the best guy",
   noResponses: [
     "No? Really?",
     "Are you sure...?",
@@ -40,8 +40,15 @@ so short lines land with more weight.
   signature: "[[EDIT ME: sign-off / your name]]",
 };
 
+export const playlist = {
+  eyebrow: "Chapter Five",
+  title: "SONGS THAT REMIND ME OF YOU",
+  subtitle: "A little playlist for a little you.",
+  listenLabel: "Tap to listen",
+  continueLabel: "keep going",
+};
+
 export const finale = {
   heading: "Happy Birthday, Baby.",
-  closingMessage:
-    "[[EDIT ME: your closing message for the finale — the last thing she reads before the gift reveal.]]",
+  closingMessage: "HAPPY BIRTHDAY MY LOVE, I LOVE YOU THE MOSTESTT.",
 };
